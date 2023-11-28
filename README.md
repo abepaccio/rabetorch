@@ -1,5 +1,11 @@
 # rabetorch
 
+## Overview
+This repository is created for traininig program of pytorch.
+We downroaded VOC dataset as annotation data but we only support COCO format.
+To use VOC dataset in this repository, we implemented VOC2COCO converter.
+See detail in `./scripts/voc2coco.py`
+
 ## Envirionment
 ### docker build
 Please make sure to change dir to root dir of this repository.
