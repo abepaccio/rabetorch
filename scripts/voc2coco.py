@@ -84,7 +84,7 @@ def convert_voc_annotation_to_coco(image_path: str, annotation_path: str, label_
     Returns:
         str: The coco annotation.
     """
-    anno_id = 01
+    anno_id = 0
     # Parse the VOC annotation
     tree = ET.parse(annotation_path)
     root = tree.getroot()
