@@ -1,0 +1,117 @@
+[
+    {
+        "id": 0,
+        "name": "person",
+        "supercategory": "person"
+    },
+    {
+        "id": 1,
+        "name": "head",
+        "supercategory": "person_head"
+    },
+    {
+        "id": 2,
+        "name": "foot",
+        "supercategory": "person_foot"
+    },
+    {
+        "id": 3,
+        "name": "hand",
+        "supercategory": "person_hand"
+    },
+    {
+        "id": 4,
+        "name": "boat",
+        "supercategory": "vehicle"
+    },
+    {
+        "id": 5,
+        "name": "bicycle",
+        "supercategory": "vehicle"
+    },
+    {
+        "id": 6,
+        "name": "bus",
+        "supercategory": "vehicle"
+    },
+    {
+        "id": 7,
+        "name": "car",
+        "supercategory": "vehicle"
+    },
+    {
+        "id": 8,
+        "name": "horse",
+        "supercategory": "animal"
+    },
+    {
+        "id": 9,
+        "name": "motorbike",
+        "supercategory": "vehicle"
+    },
+    {
+        "id": 10,
+        "name": "diningtable",
+        "supercategory": "indoor"
+    },
+    {
+        "id": 11,
+        "name": "aeroplane",
+        "supercategory": "vehicle"
+    },
+    {
+        "id": 12,
+        "name": "pottedplant",
+        "supercategory": "indoor"
+    },
+    {
+        "id": 13,
+        "name": "bottle",
+        "supercategory": "kitchen"
+    },
+    {
+        "id": 14,
+        "name": "train",
+        "supercategory": "vehicle"
+    },
+    {
+        "id": 15,
+        "name": "chair",
+        "supercategory": "indoor"
+    },
+    {
+        "id": 16,
+        "name": "sofa",
+        "supercategory": "indoor"
+    },
+    {
+        "id": 17,
+        "name": "cow",
+        "supercategory": "animal"
+    },
+    {
+        "id": 18,
+        "name": "dog",
+        "supercategory": "animal"
+    },
+    {
+        "id": 19,
+        "name": "tvmonitor",
+        "supercategory": "indoor"
+    },
+    {
+        "id": 20,
+        "name": "sheep",
+        "supercategory": "animal"
+    },
+    {
+        "id": 21,
+        "name": "cat",
+        "supercategory": "animal"
+    },
+    {
+        "id": 22,
+        "name": "bird",
+        "supercategory": "animal"
+    }
+]
