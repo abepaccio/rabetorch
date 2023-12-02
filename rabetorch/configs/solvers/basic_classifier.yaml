@@ -1,0 +1,5 @@
+SOLVER:
+  OPTIMIZER: SGD
+  LOSS: CrossEntropyLoss
+  BASE_LR: 0.01
+  MAX_EPOCH: 100

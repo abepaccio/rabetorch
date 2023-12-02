@@ -1,0 +1,10 @@
+DATA:
+  DATA_ROOT: ""
+  DATA_LOADER: TorchDataLoader
+  TRAIN_DATA:
+    - IS_ONLINE_DATA: True
+      TYPE: TorchCIFAR10
+      DO_SHUFFLE: True
+  TEST_DATA:
+    - IS_ONLINE_DATA: True
+      TYPE: TorchCIFAR10
