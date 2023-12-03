@@ -1,5 +1,6 @@
 MODEL:
   HEAD:
-    TYPE: BasicLinear
+    TYPE: BasiClassifier
     NUM_LAYER: 2
+    IN_CHANNEL: 128
     OUT_CHANNEL: [128, 10]

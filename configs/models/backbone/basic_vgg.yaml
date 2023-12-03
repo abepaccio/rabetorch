@@ -6,5 +6,5 @@ MODEL:
     STRIDE: [1, 1, 1]
     KERNEL_SIZE: [3, 3, 3]
     PADDING: [1, 1, 1]
-    MAXPOOL: [True, True, True]
+    MAXPOOL_STRIDE: [2, 2, 2]
     FLATTEN_OUT: True
