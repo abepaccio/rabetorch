@@ -20,6 +20,8 @@ RUN apt-get update \
         python3-pip \
     && apt-get clean all
 
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
 # create a developer user as a member of developer group
 ARG USERNAME=developer
 ARG GROUPNAME=developer
@@ -40,3 +42,5 @@ RUN pip3 install -r requirements.txt
 
 # copy repository files
 COPY ./ ./
+
+ENV PYTHONPATH ./

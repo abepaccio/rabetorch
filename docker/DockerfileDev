@@ -20,6 +20,8 @@ RUN apt-get update \
         python3-pip \
     && apt-get clean all
 
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
 # login as your own user and user group
 ARG USER_ID
 ARG GROUP_ID
@@ -51,3 +53,5 @@ RUN pip3 install -r requirements.txt
 
 # copy repository files
 COPY ./ ./
+
+ENV PYTHONPATH ./
