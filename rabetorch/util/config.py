@@ -12,6 +12,8 @@ class ConfigObject:
         for key, val in _dcit.items():
             if isinstance(val, dict):
                 val = ConfigObject(val)
+            elif isinstance(val, list):
+                val = [ConfigObject(item) if isinstance(item, dict) else item for item in val]
             self.__dict__[key] = val
 
     def update(self, update_cfg: 'ConfigObject') -> None:
@@ -36,3 +38,7 @@ def _print_attributes(obj, indent=0):
         print(" " * indent + f"{attr} = {value}")
         if isinstance(value, object) and hasattr(value, "__dict__"):
             _print_attributes(value, indent + 4)
+        elif isinstance(value, list):
+            for item in value:
+                if isinstance(item, ConfigObject):
+                    _print_attributes(item, indent + 4)
