@@ -1,10 +1,21 @@
 DATA:
-  DATA_ROOT: ""
   DATA_LOADER: TorchDataLoader
+  DATA_ROOT: ""
   TRAIN_DATA:
-    - IS_ONLINE_DATA: True
-      TYPE: TorchCIFAR10
+    - TYPE: TorchCIFAR10
+      IS_TRAIN: True
       DO_SHUFFLE: True
+      DATA_PATH: ./data
+      TRANSFORM:
+        - TYPE: ToTensor
+        - TYPE: Normalize
+          MEAN: [0.5, 0.5, 0.5]
+          STD: [0.5, 0.5, 0.5]
   TEST_DATA:
-    - IS_ONLINE_DATA: True
-      TYPE: TorchCIFAR10
+    - TYPE: TorchCIFAR10
+      DATA_PATH: ./data
+      TRANSFORM:
+        - TYPE: ToTensor
+        - TYPE: Normalize
+          MEAN: [0.5, 0.5, 0.5]
+          STD: [0.5, 0.5, 0.5]
