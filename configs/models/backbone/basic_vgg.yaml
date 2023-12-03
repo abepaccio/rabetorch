@@ -1,0 +1,10 @@
+MODEL:
+  BACKBONE:
+    TYPE: BasicVGG
+    NUM_LAYER: 3
+    OUT_CHANNEL: [64, 128, 256]
+    STRIDE: [1, 1, 1]
+    KERNEL_SIZE: [3, 3, 3]
+    PADDING: [1, 1, 1]
+    MAXPOOL: [True, True, True]
+    FLATTEN_OUT: True

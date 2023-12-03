@@ -17,6 +17,15 @@ docker build -t rabetorch:<version>  -f ./docker/Dockerfile .
 docker build -t rabetorch -f ./docker/Dockerfile .
 ```
 
+### docker build for develop
+```
+docker build --build-arg USER_ID=$(id -u [username]) --build-arg GROUP_ID=$(id -g [username]) --build-arg YOUR_USR=$(id -u [username]) -t rabetorch:<version>  -f ./docker/DockerfileDev .
+```
+(example)
+```
+docker build --build-arg USER_ID=$(id -u rabe) --build-arg GROUP_ID=$(id -g rabe) --build-arg YOUR_USER=rabe -t rabetorch -f ./docker/DockerfileDev .
+```
+
 ### docker run
 ```
 docker run --name <name-of-container> -it rabetorch:<version> /bin/bash

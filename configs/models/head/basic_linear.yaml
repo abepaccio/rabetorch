@@ -1,0 +1,5 @@
+MODEL:
+  HEAD:
+    TYPE: BasicLinear
+    NUM_LAYER: 2
+    OUT_CHANNEL: [128, 10]
