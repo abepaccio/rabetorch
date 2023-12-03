@@ -5,7 +5,7 @@ from rabetorch.models.backbone.basic_vgg import BasicVgg
 from rabetorch.models.head.basic_classifier import BasiClassifier
 
 _backbones = {
-    "BasicVgg": BasicVgg,
+    "BasicVGG": BasicVgg,
 }
 _necks = {}
 _heads = {
