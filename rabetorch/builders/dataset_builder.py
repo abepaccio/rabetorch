@@ -11,18 +11,11 @@ class DatasetBuilder():
         self.train_ds_cfg = data_cfg.TRAIN_DATA
         self.test_ds_cfg = data_cfg.TEST_DATA
 
-    def build_train_dataset(self):
-        train_datasets = []
-        for ds_cfg in self.train_ds_cfg:
+    def build_dataset(self, is_tain):
+        ds_cfgs = self.train_ds_cfg if is_tain else self.test_ds_cfg
+        ds = []
+        for ds_cfg in ds_cfgs:
             dataset = _datasets[ds_cfg.TYPE](ds_cfg)
             dataset.build_dataset()
-            train_datasets.append(dataset)
-
-    def build_test_dataset(self):
-        test_datasets = []
-        for ds_cfg in self.test_ds_cfg:
-            dataset = _datasets[ds_cfg.TYPE](ds_cfg)
-            dataset.build_dataset()
-            test_datasets.append(dataset)
-
-# あとはloader, optimeizer, modelのコンパイル, ロスの登録, 学習パイプラインの記述, 評価パイプラインの記述
+            ds.append(dataset)
+        return ds
