@@ -1,10 +1,9 @@
 DATA:
-  DATA_LOADER: TorchDataLoader
+  DATA_LOADER: BasicDataLoader
   DATA_ROOT: ""
   TRAIN_DATA:
     - TYPE: TorchCIFAR10
       IS_TRAIN: True
-      DO_SHUFFLE: True
       DATA_PATH: ./data
       TRANSFORM:
         - TYPE: ToTensor

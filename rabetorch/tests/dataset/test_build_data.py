@@ -2,12 +2,17 @@ import os
 import sys
 sys.path.append(os.getcwd())
 
+import torchvision
+import torchvision.transforms as transforms
+
 from rabetorch.builders.dataset_builder import DatasetBuilder
+from rabetorch.builders.pipeline_builder import PipelineBuilder
+from rabetorch.datasets.data_loader import BasicDataLoader
 from rabetorch.util.config import parse_dict_config, _print_attributes
 from rabetorch.util.io_util import load_yaml
 
 
-def test_build_cifar10():
+def test_build_pipeline_with_basic_dataloader():
     # load config
     yaml_fp = "configs/basic_classifier.yaml"
     base_cfg_dict = load_yaml(yaml_fp)
@@ -18,7 +23,13 @@ def test_build_cifar10():
             _cfg = parse_dict_config(sub_cfg_dict)
             cfg.update(_cfg)
 
-    # build dataset
-    ds_builder = DatasetBuilder(cfg.DATA)
-    train_data = ds_builder.build_dataset(is_tain=True)
-    test_data = ds_builder.build_dataset(is_tain=False)
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+    ])
+    # build pipeline
+    train_set = torchvision.datasets.CIFAR10(
+        root='./data', train=True, download=True, transform=transform
+    )
+    pipeline = PipelineBuilder(cfg.DATA, is_train=True)
+    pipeline.build_pipeline(train_set)

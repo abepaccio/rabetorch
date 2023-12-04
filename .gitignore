@@ -3,6 +3,8 @@
 .pytest_cache/*
 *.pyc
 *.DS_Store
+*/cifar-*-py/*
+*.tar.gz
 
 # ignore output
 .output/*
