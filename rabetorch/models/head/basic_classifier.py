@@ -19,7 +19,7 @@ class BasiClassifier(nn.Module):
         assert len(self.out_channels) == self.num_layer
 
         # prepare convolutions
-        self.fcs = []
+        self.fcs = nn.ModuleList()
         for layer_idx in range(self.num_layer):
             if layer_idx == 0:
                 _fc = nn.Linear(self.in_channel, self.out_channels[layer_idx])

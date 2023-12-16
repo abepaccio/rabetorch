@@ -2,6 +2,8 @@ numpy
 opencv-python
 torch
 torchvision
+torchsummary
 tqdm
 pyyaml
 pytest
+omegaconf

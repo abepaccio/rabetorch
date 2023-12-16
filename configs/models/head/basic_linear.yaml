@@ -2,5 +2,5 @@ MODEL:
   HEAD:
     TYPE: BasiClassifier
     NUM_LAYER: 2
-    IN_CHANNEL: 128
+    IN_CHANNEL: 4096
     OUT_CHANNEL: [128, 10]

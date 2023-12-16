@@ -5,14 +5,14 @@ BASE:
   - dataset/basic_classifier.yaml
 
 SOLVER:
-  BASE_LR: 0.001
-  MAX_EPOCH: 10
+  BASE_LR: 0.003
+  MAX_EPOCH: 100
 
 DATA:
-  TOTAL_BATCH: 64
+  TOTAL_BATCH: 128
   NUM_GPU: 1
 
 EVALUATION:
   TYPE: BasicACC
 
-BASE_CONFIG: basic_classifier.yaml
+PRIMARY_CONFIG: basic_classifier.yaml
