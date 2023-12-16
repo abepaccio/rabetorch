@@ -1,44 +1,43 @@
-from rabetorch.util.io_util import load_yaml
+from omegaconf import OmegaConf
 
 
-class ConfigObject:
-    """Config object to manege configure."""
-    def __init__(self, _dcit: dict) -> None:
-        """Initialization of ConfigObject.
+def load_config(config_path, override):
+    base_cfg = OmegaConf.load(config_path)
+    if hasattr(base_cfg, "BASE"):
+        for _sub_cfg_path in base_cfg.BASE:
+            _sub_cfg = OmegaConf.load("configs/" + _sub_cfg_path)
+            base_cfg = OmegaConf.merge(base_cfg, _sub_cfg)
 
-        Args:
-            _dcit (dict): Dictionary config.
-        """
-        for key, val in _dcit.items():
-            if isinstance(val, dict):
-                val = ConfigObject(val)
-            elif isinstance(val, list):
-                val = [ConfigObject(item) if isinstance(item, dict) else item for item in val]
-            self.__dict__[key] = val
+    if hasattr(base_cfg, "PRIMARY_CONFIG"):
+        primary_cfg = OmegaConf.load("configs/" + base_cfg.PRIMARY_CONFIG)
+        base_cfg = OmegaConf.merge(base_cfg, primary_cfg)
 
-    def update(self, update_cfg: 'ConfigObject') -> None:
-        """Update base config by new config.
+    if override:
+        omega_dict = {}
+        for key, val in override.items():
+            keys = key.split(".")
+            _dict = omega_dict
+            for k in keys[:-1]:
+                if k not in _dict:
+                    _dict[k] = {}
+                _dict = _dict[k]
+            _dict[keys[-1]] = val
+        override_cfg = OmegaConf.create(omega_dict)
+        base_cfg = OmegaConf.merge(base_cfg, override_cfg)
 
-        Args:
-            update_cfg (ConfigObject): New config to update.
-        """
-        for key, val in update_cfg.__dict__.items():
-            if hasattr(self, key) and isinstance(getattr(self, key), ConfigObject) and isinstance(val, ConfigObject):
-                getattr(self, key).update(val)
-            else:
-                self.__dict__[key] = val
-
-
-def parse_dict_config(d):
-    return ConfigObject(d)
+    print("Config load has done. Here is confiuration of this run.")
+    print(OmegaConf.to_yaml(base_cfg))
+    return base_cfg
 
 
-def _print_attributes(obj, indent=0):
-    for attr, value in obj.__dict__.items():
-        print(" " * indent + f"{attr} = {value}")
-        if isinstance(value, object) and hasattr(value, "__dict__"):
-            _print_attributes(value, indent + 4)
-        elif isinstance(value, list):
-            for item in value:
-                if isinstance(item, ConfigObject):
-                    _print_attributes(item, indent + 4)
+def smart_type(arg_value):
+    """
+    Convert the argument to int or float if possible, otherwise return as string.
+    """
+    try:
+        return int(arg_value)
+    except ValueError:
+        try:
+            return float(arg_value)
+        except ValueError:
+            return arg_value

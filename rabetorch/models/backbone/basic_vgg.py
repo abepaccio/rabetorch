@@ -27,7 +27,7 @@ class BasicVgg(nn.Module):
         assert len(self.kernel_sizes) == self.num_layer
 
         # prepare convolutions
-        self.convs = []
+        self.convs = nn.ModuleList()
         for layer_idx in range(self.num_layer):
             if layer_idx == 0:
                 _conv = nn.Conv2d(
@@ -60,9 +60,8 @@ class BasicVgg(nn.Module):
         """
         for _conv, maxxpool_stride in zip(self.convs, self.maxxpool_strides):
             x = F.relu(_conv(x))
-            if not maxxpool_stride:
-                continue
-            x = F.max_pool2d(x, maxxpool_stride)
+            if maxxpool_stride:
+                x = F.max_pool2d(x, maxxpool_stride)
         if self.flatten_out:
             # output row vector
             return x.view(x.size(0), -1)

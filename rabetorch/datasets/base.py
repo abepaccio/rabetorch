@@ -22,6 +22,7 @@ class MultiDataset(torch.utils.data.Dataset):
 
 class BaseDataset():
     def __init__(self, dataset_cfg) -> None:
+        super(BaseDataset, self).__init__()
         self.dataset_cfg = dataset_cfg
         self.transform_cfg = dataset_cfg.TRANSFORM
         self.data_path = dataset_cfg.DATA_PATH
@@ -41,4 +42,4 @@ class BaseDataset():
         return transforms.Compose(transform_list)
 
     def build_dataset(self):
-        pass
+        raise NotImplementedError
