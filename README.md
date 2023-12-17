@@ -2,9 +2,6 @@
 
 ## Overview
 This repository is created for traininig program of pytorch.
-We downroaded VOC dataset as annotation data but we only support COCO format.
-To use VOC dataset in this repository, we implemented VOC2COCO converter.
-See detail in `./scripts/voc2coco.py`
 
 ## Envirionment
 ### docker build
@@ -35,4 +32,22 @@ docker run --name <name-of-container> -it rabetorch:<version> /bin/bash
 docker run --name rabe-torch -it --rm -v /Users/rabe:/Users/rabe rabetorch:latest /bin/bash
 ```
 
+## Train
+You can run train script by command below;
+```
+python scripts/train.py YOUR_CONFIG_NAME OVERRIDE_CONFIG
+```
+here, `YOUR_CONFIG_NAME` is file name of config you want to use.
+`YOUR_CONFIG_NAME` must be written as relative path from `./configs`.
+Also, you can override config from argument. Please refer example for detail.
+
+(example)
+```
+python scripts/train.py basic_classifier SOLVER.MAX_EPOCH 12
+```
+
 ## Other
+### Data main strategy
+We downloaded VOC dataset as annotation data but we only support COCO format.
+To use VOC dataset in this repository, we implemented VOC2COCO converter.
+See detail in `./scripts/voc2coco.py`
