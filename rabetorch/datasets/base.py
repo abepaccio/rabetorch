@@ -9,17 +9,6 @@ _transforms = {
 }
 
 
-class MultiDataset(torch.utils.data.Dataset):
-    def __init__(self, datasets: tuple):
-        self.datasets = datasets
-
-    def __getitem__(self, i):
-        return tuple(d[i] for d in self.datasets)
-
-    def __len__(self):
-        return min(len(d) for d in self.datasets)
-
-
 class BaseDataset():
     def __init__(self, dataset_cfg) -> None:
         super(BaseDataset, self).__init__()

@@ -1,23 +1,30 @@
 import os
 import sys
+from omegaconf import OmegaConf
 sys.path.append(os.getcwd())
 
 from rabetorch.builders.model_builder import ModelBuilder
-from rabetorch.util.config import parse_dict_config
-from rabetorch.util.io_util import load_yaml
 
 
-def test_basic_classifier_builder():
-    # load config
-    yaml_fp = "configs/basic_classifier.yaml"
-    base_cfg_dict = load_yaml(yaml_fp)
-    cfg = parse_dict_config(base_cfg_dict)
-    if hasattr(cfg, "BASE"):
-        for sub_cfg_path in base_cfg_dict.get("BASE", None):
-            sub_cfg_dict = load_yaml("configs/" + sub_cfg_path)
-            _cfg = parse_dict_config(sub_cfg_dict)
-            cfg.update(_cfg)
+def test_build_model():
+    # set config
+    cfg_dict = {
+        "BACKBONE": {
+            "TYPE": "BasicVGG",
+            "NUM_LAYER": 1,
+            "OUT_CHANNEL": [64],
+            "KERNEL_SIZE": [3],
+            "FLATTEN_OUT": True,
+        },
+        "HEAD": {
+            "TYPE": "BasiClassifier",
+            "NUM_LAYER": 1,
+            "IN_CHANNEL": 64,
+            "OUT_CHANNEL": [10],
+        }
+    }
+    cfg = OmegaConf.create(cfg_dict)
 
     # build model
-    model = ModelBuilder(cfg.MODEL)
-    model.build_model()
+    model_builder = ModelBuilder(cfg)
+    model_builder.build_model()

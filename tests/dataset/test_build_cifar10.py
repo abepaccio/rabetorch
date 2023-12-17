@@ -1,17 +1,20 @@
 import os
 import sys
+from omegaconf import OmegaConf
 sys.path.append(os.getcwd())
 
-from rabetorch.builders.dataset_builder import DatasetBuilder
-from rabetorch.util.config import load_config
+from rabetorch.datasets.cifar10 import TorchCIFAR10
 
 
 def test_build_cifar10():
-    # load config
-    yaml_fp = "configs/basic_classifier.yaml"
-    cfg = load_config(yaml_fp)
+    # set config
+    cfg_dict = {
+        "TRANSFORM": [{"TYPE": "ToTensor"}],
+        "DATA_PATH": "./data",
+    }
+    cfg = OmegaConf.create(cfg_dict)
 
     # build dataset
-    ds_builder = DatasetBuilder(cfg.DATA)
-    train_data = ds_builder.build_dataset(is_tain=True)
-    test_data = ds_builder.build_dataset(is_tain=False)
+    torch_cifar_10 = TorchCIFAR10(cfg, is_train=True)
+    torch_cifar_10.build_dataset()
+    len(torch_cifar_10)
