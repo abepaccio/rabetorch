@@ -29,18 +29,22 @@ ARG UID=1000
 ARG GID=1000
 RUN groupadd -g $GID $GROUPNAME && \
     useradd -m -s /bin/bash -u $UID -g $GID $USERNAME
-USER $USERNAME
 
 # create work dir and login as developer
 WORKDIR /app
-ENV USER_NAME=developer
 
 # install python module
-COPY ./requirements.txt ./requirements.txt
+COPY --chown=$USERNAME:$GROUPNAME ./requirements.txt ./requirements.txt
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 
+
 # copy repository files
-COPY ./ ./
+COPY --chown=$USERNAME:$GROUPNAME ./ ./
+
+# install and initialize pre-commit as the developer user
+USER $USERNAME
+RUN pre-commit install && pre-commit install -t pre-push
 
 ENV PYTHONPATH ./
+ENV USER_NAME $USERNAME

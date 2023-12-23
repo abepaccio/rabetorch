@@ -41,17 +41,17 @@ RUN if id -u $YOUR_USER > /dev/null 2>&1; then \
 
 RUN install -d -m 0755 -o $YOUR_USER -g $GROUP_ID /home/$YOUR_USER
 
-USER $YOUR_USER
-
 # create work dir
 WORKDIR /app
 
-# install python module
-COPY ./requirements.txt ./requirements.txt
+# Install python modules as the YOUR_USER user
+COPY --chown=$YOUR_USER:$GROUP_ID ./requirements.txt ./requirements.txt
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 
-# copy repository files
-COPY ./ ./
+# Copy repository files as the YOUR_USER user
+COPY --chown=$YOUR_USER:$GROUP_ID ./ ./
+
+USER $YOUR_USER
 
 ENV PYTHONPATH ./
