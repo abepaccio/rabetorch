@@ -7,3 +7,6 @@ tqdm
 pyyaml
 pytest
 omegaconf
+flake8
+black
+pre-commit
